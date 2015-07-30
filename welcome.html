@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>DataBerries Formulaire Client </title>
+        <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+</head>
+<body>
+        <ul id="titre">
+                <li>Bienvenue chez Databerries</li>
+        </ul>
+        <form id="form1">
+                Votre nom :<input type="text" name="nom_client" id="nom_client"><br/>
+				Le nom de votre entreprise : <input type="text" name="nom_entreprise" id="nom_entreprise"><br/>
+				Votre Adresse : <br/>
+				Numéro de la rue : <input type="text" name="adresse_numero_rue" id="adresse_numero_rue"><br/>
+				Nom de la rue : <input type="text" name="adresse_nom_rue" id="adresse_nom_rue"><br/>
+				Code Postal : <input type="text" name="adresse_code_postal" id="adresse_code_postal"><br/>
+				Ville : <input type="text" name="adresse_ville" id="adresse_ville"><br/>
+				Votre Email :<input type="text" name="email_client" id="email_client"><br/>
+                <input type="submit" name="submit" id="submit" value="Envoyer">
+        </form>
+		
+		<ul id="info1">
+                <li></li>
+        </ul>
+		
+        <script>
+        $('#form1').submit(function(event) {
+				$('#info1').html = '';
+                event.preventDefault();
+                $.ajax({
+                        type: 'POST',
+                        url: 'ajax.php',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function (data) {
+                                console.log(data);
+                                $('#info1').html(data.msg);
+                        }
+                });
+        });
+        </script>
+</body>
+</html>
